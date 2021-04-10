@@ -8,6 +8,7 @@ import { AdminPageRoutingModule } from './admin-routing.module';
 
 import { AdminPage } from './admin.page';
 import { LoginComponent } from './login/login.component';
+import { AddEmergencyComponent } from './add-emergency/add-emergency.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,10 @@ import { LoginComponent } from './login/login.component';
     FormsModule, 
     ReactiveFormsModule,
   ],
-  declarations: [AdminPage, LoginComponent]
+  declarations: [
+    AdminPage, 
+    LoginComponent, 
+    AddEmergencyComponent
+  ]
 })
 export class AdminPageModule {}

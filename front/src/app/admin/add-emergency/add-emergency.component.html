@@ -1,0 +1,59 @@
+<ion-content>
+
+
+    <ion-button expand="block" fill="solid" (click) = "toggleShow()">Proglasite vanrednu situaciju</ion-button>
+  <div *ngIf="show">
+    <form>
+
+      <ion-list [formGroup]="emergencyCreateForm" (ngSubmit)="submit()">
+        <ion-item>
+          <ion-label position="floating">Tip situacije:</ion-label>
+          <ion-input clearInput formControlName="emergencyType" inputmode="emergencyType"></ion-input>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.emergencyType">
+          <ng-container *ngIf="emergencyType.hasError(error.type) && (emergencyType.dirty || emergencyType.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+        <ion-item>
+          <ion-label position="floating">Status:</ion-label>
+          <ion-input clearInput formControlName="status" inputmode="status"></ion-input>
+          
+        </ion-item>
+        <div *ngFor="let error of errorMessages.status">
+          <ng-container *ngIf="status.hasError(error.type) && (status.dirty || status.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+          <ng-container *ngElse="status.hasError(error.type) && (status.dirty || status.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+
+        <ion-item>
+          <ion-label position="floating">E-mail:</ion-label>
+          <ion-input clearInput formControlName="advice" inputmode="advice"></ion-input>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.advice">
+          <ng-container *ngIf="advice.hasError(error.type) && (advice.dirty || advice.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+        
+        <!-- <ion-item>
+          <ion-label position="floating">E-mail:</ion-label>
+          <ion-input clearInput formControlName="municipalityID" inputmode="municipalityID"></ion-input>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.municipalityID">
+          <ng-container *ngIf="municipalityID.hasError(error.type) && (municipalityID.dirty || municipalityID.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div> -->
+
+        <ion-button [disabled]="!emergencyCreateForm.valid" type="submit" expand="block">
+          Submit
+          <ion-icon slot="end" name="create"></ion-icon>
+        </ion-button>
+      </ion-list>
+    </form>
+  </div>
+</ion-content>
