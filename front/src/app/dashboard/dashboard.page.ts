@@ -16,7 +16,7 @@ export class DashboardPage implements OnInit {
 
   latitude: number;
   longitude: number;
-  constructor(private questionService:QuestionService, private geolocation: Geolocation) { }
+  constructor(private questionService: QuestionService, private geolocation: Geolocation) { }
 
   ngOnInit() {
     this.questionService.addAnswers();
@@ -40,7 +40,11 @@ export class DashboardPage implements OnInit {
       // this.getAddressFromCoords(resp.coords.latitude, resp.coords.longitude);
 
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-
+      new google.maps.Marker({
+        position: latLng,
+        map:this.map,
+        title: "Ovde si!",
+      });
       // this.map.addListener('dragend', () => {
 
       //   this.latitude = this.map.center.lat();
