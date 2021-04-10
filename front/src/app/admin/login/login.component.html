@@ -1,30 +1,30 @@
 <ion-content>
-  <form>
-    <ion-list [formGroup]="registrationForm" (ngSubmit)="submit()">
-      <ion-item>
-        <ion-label position="floating">E-mail:</ion-label>
-        <ion-input formControlName="email" inputmode="email"></ion-input>
-      </ion-item>
-      <div *ngFor="let error of errorMessages.email">
-        <ng-container *ngIf="email.hasError(error.type) && (email.dirty || email.touched)">
-          <small class="error-message">{{error.message}}</small>
-        </ng-container>
-      </div>
+    <form (ngSubmit)="submit()">
+        <ion-list [formGroup]="registrationForm">
+            <ion-item>
+                <ion-label position="floating">E-mail:</ion-label>
+                <ion-input formControlName="email" inputmode="email"></ion-input>
+            </ion-item>
+            <div *ngFor="let error of errorMessages.email">
+                <ng-container *ngIf="email.hasError(error.type) && (email.dirty || email.touched)">
+                    <small class="error-message">{{error.message}}</small>
+                </ng-container>
+            </div>
 
-      <ion-item>
-        <ion-label position="floating">Password:</ion-label>
-        <ion-input formControlName="password" type="password" inputmode="password"></ion-input>
-      </ion-item>
-      <div *ngFor="let error of errorMessages.password">
-        <ng-container *ngIf="password.hasError(error.type) && (password.dirty || password.touched)">
-          <small class="error-message">{{error.message}}</small>
-        </ng-container>
-      </div>
+            <ion-item>
+                <ion-label position="floating">Password:</ion-label>
+                <ion-input formControlName="password" type="password" inputmode="password"></ion-input>
+            </ion-item>
+            <div *ngFor="let error of errorMessages.password">
+                <ng-container *ngIf="password.hasError(error.type) && (password.dirty || password.touched)">
+                    <small class="error-message">{{error.message}}</small>
+                </ng-container>
+            </div>
 
-      <ion-button [disabled]="!registrationForm.valid" type="submit" expand="block">
-        Submit
-        <ion-icon slot="end" name="create"></ion-icon>
-      </ion-button>
-    </ion-list>
-  </form>
+            <ion-button [disabled]="!registrationForm.valid" type="submit" expand="block">
+                Submit
+                <ion-icon slot="end" name="create"></ion-icon>
+            </ion-button>
+        </ion-list>
+    </form>
 </ion-content>

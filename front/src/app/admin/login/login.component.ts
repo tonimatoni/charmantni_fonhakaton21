@@ -1,5 +1,7 @@
 import { Component, NgModule, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   public errorMessages = {
     phoneNumber: [
-      { type: 'required', message: 'Morate uneti broj telefona' },
+      // { type: 'required', message: 'Morate uneti broj telefona' },
       { type: 'pattern', message: 'Unesite validan broj telefona' }
     ],
     email: [
@@ -40,21 +42,23 @@ export class LoginComponent implements OnInit {
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$')
       ]],
-    phoneNumber: ['',
-      [Validators.required,
+    // phoneNumber: ['',
+    //   [Validators.required,
 
-      Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$'),]],
+    //   Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$'),]],
     password: ['',
       [Validators.required]]
   });
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private router:Router, private formBuilder: FormBuilder, private fsAuth:AngularFireAuth) {
 
   }
 
   ngOnInit() {
   }
 
-  public submit() {
-    console.log(this.registrationForm.value)
+  public async submit() {
+    const user = await this.fsAuth.signInWithEmailAndPassword(this.registrationForm.controls.email.value, this.registrationForm.controls.password.value)
+    console.log(user);
+    if(user) this.router.navigateByUrl('admin/actions')
   }
 }

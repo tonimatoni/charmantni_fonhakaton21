@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { EmergencyService } from 'src/app/services/emergency.service';
+import { MunicipilityService } from 'src/app/services/municipility.service';
 
 @Component({
   selector: 'app-add-emergency',
@@ -9,6 +10,7 @@ import { EmergencyService } from 'src/app/services/emergency.service';
   styleUrls: ['./add-emergency.component.scss'],
 })
 export class AddEmergencyComponent implements OnInit {
+
   get advice() {
     return this.emergencyCreateForm.get('advice');
   }
@@ -45,8 +47,15 @@ export class AddEmergencyComponent implements OnInit {
   });
 
   show = false;
+  allMunicipilities: any[];
 
-  constructor(private formBuilder: FormBuilder, private firestore: AngularFirestore, private emergencyService: EmergencyService) {
+  constructor(private municipalityService: MunicipilityService, private formBuilder: FormBuilder, private firestore: AngularFirestore, private emergencyService: EmergencyService) {
+    
+    municipalityService.getAllMunicipilities().subscribe((allMunicipilities) => {
+      console.log(allMunicipilities);
+      this.allMunicipilities = allMunicipilities.sort((a, b) => a.nOPS.localeCompare(b.nOPS));
+    })
+  
   }
 
   ngOnInit() {
