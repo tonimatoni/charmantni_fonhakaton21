@@ -26,5 +26,9 @@
     <ion-item>
         <div id="recaptcha-container"></div>
     </ion-item>
+    <ion-item>
+        <ion-label position="stacked">Stacked Label</ion-label>
+        <ion-input [formControl]=smsCode (ionChange)="verifyCode()"></ion-input>
+    </ion-item>
     <ion-button color="success" expand="block" (click)="register()">Registruj se</ion-button>
 </ion-content>
