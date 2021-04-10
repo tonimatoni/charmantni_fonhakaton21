@@ -1,7 +1,8 @@
 {
   "name": "Fon Hakaton",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }
