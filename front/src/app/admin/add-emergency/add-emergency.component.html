@@ -42,22 +42,13 @@
                 </div>
 
                 <!-- <ion-item>
-          <ion-label position="floating">E-mail:</ion-label>
-          <ion-input clearInput formControlName="municipalityID" inputmode="municipalityID"></ion-input>
-        </ion-item>
-        <div *ngFor="let error of errorMessages.municipalityID">
-          <ng-container *ngIf="municipalityID.hasError(error.type) && (municipalityID.dirty || municipalityID.touched)">
-            <small class="error-message">{{error.message}}</small>
-          </ng-container>
-        </div> -->
-
-                <!-- <ion-item>
                     <!-- select with search bar needed for opstina -->
                 <!--<ion-label position="floating">Opština</ion-label>
                     <ion-select formControlName='municipality' okText="Potvrdi" cancelText="Otkaži">
                         <ion-select-option *ngFor="let m of allMunicipilities" [value]="m.MBOPS">{{m.nOPS}}</ion-select-option>
                     </ion-select>
                 </ion-item> -->
+
                 <ion-button [disabled]="!emergencyCreateForm.valid" type="submit" expand="block">
                     Submit
                     <ion-icon slot="end" name="create"></ion-icon>
