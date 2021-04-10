@@ -97,14 +97,14 @@ exports.updateMunicipalities = functions.https.onRequest(async (req, res) => {
           res.on("data", (chunk) => {
             rawData += chunk;
           });
-          res.on("end", () => {
+          res.on("end", async () => {
             try {
               const municipalities = JSON.parse(rawData);
               let i = 0;
               for (let m of municipalities) {
-                  console.log(i, municipalities.length)
-                  await admin.firestore().doc(`municipalities/${m.MBOPS}`).set(m)
-                  i++;
+                console.log(i, municipalities.length);
+                await admin.firestore().doc(`municipalities/${m.MBOPS}`).set(m);
+                i++;
               }
             } catch (e) {
               throw e;
