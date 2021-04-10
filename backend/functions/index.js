@@ -35,9 +35,16 @@ exports.pushNotif = functions.https.onRequest((req, res) => {
         });
 });
 
-exports.fetchByMunicipality = functions.https.onRequest(async (req, res) => {
-    
-});
+async function fetchByMunicipality(req, res) {
+    try {
+        const usersSnap = await db.collection('users').where('municipalityID', '==', req.body.municipalityID).get();
+        const users = usersSnap.map(doc => ({ ...doc.data(), id: doc.id }))
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 
 exports.createAdmin = functions.https.onRequest(async (req, res) => {
     try {
