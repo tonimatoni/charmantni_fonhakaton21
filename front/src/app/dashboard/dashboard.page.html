@@ -1,24 +1,17 @@
 <ion-header>
-    <ion-toolbar>
-        <ion-title>dashboard</ion-title>
-    </ion-toolbar>
+  <app-user-navbar> </app-user-navbar>
 </ion-header>
 
 <ion-content>
-    <ion-grid class="h-100">
-        <ion-row class="h-100">
-            <ion-col>
-                <div #map id="map" class="h-100 w-100"></div>
-            </ion-col>
-            <ion-col>
-                ion-col
-            </ion-col>
-            <ion-col>
-                ion-col
-            </ion-col>
-            <ion-col>
-                ion-col
-            </ion-col>
-        </ion-row>
-    </ion-grid>
+  <ion-grid class="h-100">
+    <ion-row class="h-100">
+      <ion-col>
+        <div #map id="map" class="h-100 w-100"></div>
+      </ion-col>
+      <ion-col> ion-col </ion-col>
+      <ion-col> ion-col </ion-col>
+      <ion-col> ion-col </ion-col>
+    </ion-row>
+  </ion-grid>
+  <app-user-footer></app-user-footer>
 </ion-content>

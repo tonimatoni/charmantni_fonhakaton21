@@ -9,15 +9,12 @@ import { DashboardPageRoutingModule } from './dashboard-routing.module';
 import { DashboardPage } from './dashboard.page';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { UserNavbarComponent } from '../user-navbar/user-navbar.component';
+import { UserFooterComponent } from '../user-footer/user-footer.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    DashboardPageRoutingModule
-  ],
-  providers:[Geolocation],
-  declarations: [DashboardPage]
+  imports: [CommonModule, FormsModule, IonicModule, DashboardPageRoutingModule],
+  providers: [Geolocation],
+  declarations: [DashboardPage, UserNavbarComponent, UserFooterComponent],
 })
 export class DashboardPageModule {}
