@@ -1,7 +1,7 @@
 const functions = require("firebase-functions");
 var admin = require("firebase-admin");
 var serviceAccount = require("./serviceAcc.json");
-
+var http = require("http");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://fon-hakaton21.firebaseio.com",
