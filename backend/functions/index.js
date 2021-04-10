@@ -106,6 +106,7 @@ exports.updateMunicipalities = functions.https.onRequest(async (req, res) => {
                 await admin.firestore().doc(`municipalities/${m.MBOPS}`).set(m);
                 i++;
               }
+              res.send(req.body);
             } catch (e) {
               throw e;
             }
@@ -116,7 +117,6 @@ exports.updateMunicipalities = functions.https.onRequest(async (req, res) => {
         console.error(`Got error: ${e.message}`);
         throw e;
       });
-    res.send(req.body);
   } catch (error) {
     res.send(error);
   }
