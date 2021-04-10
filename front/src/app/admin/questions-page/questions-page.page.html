@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>questions-page</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form>
+    <ion-list [formGroup]="questionCreateForm" (ngSubmit)="submit()">
+      <ion-item>
+        <ion-label position="floating">Pitanje:</ion-label>
+        <ion-input formControlName="questionTitle" inputmode="questionTitle"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.questionTitle">
+        <ng-container *ngIf="questionTitle.hasError(error.type) && (questionTitle.dirty || questionTitle.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+
+
+      <!-- U slucaju da guramo slajder pitanja...  -->
+      <!-- <ion-item>
+        <ion-label>Izaberite tip pitanja</ion-label>
+        <ion-select [interfaceOptions]="customActionSheetOptions"  formControlName="questionType" interface="action-sheet" placeholder="Select One">
+          <ion-select-option [value]="questionService.questionTypeEnum.YES_NO">{{questionService.questionTypeEnum.YES_NO}}</ion-select-option>
+          <ion-select-option [value]="questionService.questionTypeEnum.SLIDER">{{questionService.questionTypeEnum.SLIDER}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.questionType">
+        <ng-container *ngIf="questionType.hasError(error.type) && (questionType.dirty || questionType.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+ -->
+
+      <ion-button [disabled]="!questionCreateForm.valid" type="submit" expand="block">
+        Submit
+        <ion-icon slot="end" name="create"></ion-icon>
+      </ion-button>
+    </ion-list>
+  </form>
+</ion-content>
