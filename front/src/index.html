@@ -19,6 +19,14 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
     <script src="https://maps.google.com/maps/api/js?key=AIzaSyBzVinBbQxYF9t5Hd-Sg5W0HQjIn7vOWug"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", function() {
+                // navigator.serviceWorker.register("/flutter_service_worker.js");
+                navigator.serviceWorker.register("/firebase-messaging-sw.js");
+            });
+        }
+    </script>
 </head>
 
 <body>
