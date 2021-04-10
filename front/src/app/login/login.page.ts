@@ -69,6 +69,10 @@ export class LoginPage implements OnInit {
             },
             (error) => { console.error(error); },
           );
+          
+      this.firestore.doc(`users/${user.uid}`).set({
+        municipalityID:this.loginFormGroup.controls.municipality.value
+      }, {merge:true})
 
         this.fcm.onMessage((payload) => {
           console.log('Message received. ', payload);
