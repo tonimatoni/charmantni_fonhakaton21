@@ -20,10 +20,11 @@ export class DashboardPage implements OnInit {
 
   ngOnInit() {
     this.questionService.addAnswers();
+    this.loadMap();
   }
 
 
-  loadMap(lat, lon) {
+  loadMap() {
     this.geolocation.getCurrentPosition().then((resp) => {
 
       this.latitude = resp.coords.latitude;
