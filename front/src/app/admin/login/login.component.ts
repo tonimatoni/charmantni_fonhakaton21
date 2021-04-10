@@ -59,6 +59,6 @@ export class LoginComponent implements OnInit {
   public async submit() {
     const user = await this.fsAuth.signInWithEmailAndPassword(this.registrationForm.controls.email.value, this.registrationForm.controls.password.value)
     console.log(user);
-    if(user) this.router.navigateByUrl('admin/actions')
+    if(user) this.router.navigateByUrl('admin/vanredne-situacije')
   }
 }

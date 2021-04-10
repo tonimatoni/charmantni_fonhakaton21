@@ -15,7 +15,7 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'actions',
+    path: 'vanredne-situacije',
     component: AddEmergencyComponent 
   },
 ];
