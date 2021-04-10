@@ -1,33 +1,30 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Login</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-label required="true" position="floating">JMBG</ion-label>
-    <ion-input required type="text" pattern="[0-9]{13}"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Kontakt telefon</ion-label>
-    <ion-input
-      required="true"
-      type="tel"
-      pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
-      placeholder="0642336555"
-    ></ion-input>
-  </ion-item>
-  <ion-item>
-    <!-- select with search bar needed for opstina -->
-    <ion-label position="floating">Opština</ion-label>
-    <ion-select okText="Potvrdi" cancelText="Otkaži">
-      <ion-select-option value="vozdovac">Voždovac</ion-select-option>
-      <ion-select-option value="grocka">Grocka</ion-select-option>
-      <ion-select-option value="surcin">Surčin</ion-select-option>
-      <ion-select-option value="zvezdara">Zvezdara</ion-select-option>
-    </ion-select>
-  </ion-item>
-
-  <ion-button color="success" expand="block">Registruj se</ion-button>
+    <ion-item>
+        <ion-label required="true" position="floating">JMBG</ion-label>
+        <ion-input required type="text" pattern="[0-9]{13}"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating">Kontakt telefon</ion-label>
+        <ion-input required="true" type="tel" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" placeholder="0642336555"></ion-input>
+    </ion-item>
+    <ion-item>
+        <!-- select with search bar needed for opstina -->
+        <ion-label position="floating">Opština</ion-label>
+        <ion-select okText="Potvrdi" cancelText="Otkaži">
+            <ion-select-option value="vozdovac">Voždovac</ion-select-option>
+            <ion-select-option value="grocka">Grocka</ion-select-option>
+            <ion-select-option value="surcin">Surčin</ion-select-option>
+            <ion-select-option value="zvezdara">Zvezdara</ion-select-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <div id="recaptcha-container"></div>
+    </ion-item>
+    <ion-button color="success" expand="block" (click)="register()">Registruj se</ion-button>
 </ion-content>
