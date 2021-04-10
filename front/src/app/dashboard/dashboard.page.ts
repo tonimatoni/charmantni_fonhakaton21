@@ -45,6 +45,14 @@ export class DashboardPage implements OnInit {
         map:this.map,
         title: "Ovde si!",
       });
+
+      const latLng1 = new google.maps.LatLng(resp.coords.latitude+0.01, resp.coords.longitude+0.01);
+      console.log(resp.coords, latLng)
+      new google.maps.Marker({
+        position: latLng1,
+        map:this.map,
+        title: "Ovde s2i!",
+      });
       // this.map.addListener('dragend', () => {
 
       //   this.latitude = this.map.center.lat();
