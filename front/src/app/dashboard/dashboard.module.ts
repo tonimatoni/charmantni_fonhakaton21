@@ -9,6 +9,7 @@ import { DashboardPageRoutingModule } from './dashboard-routing.module';
 import { DashboardPage } from './dashboard.page';
 import { AnswerComponent } from './answer/answer.component'
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { QuestionsComponent } from './questions/questions.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     ReactiveFormsModule
   ],
   providers: [Geolocation],
-  declarations: [DashboardPage, AnswerComponent]
+  declarations: [DashboardPage, AnswerComponent, QuestionsComponent]
 })
 export class DashboardPageModule { }

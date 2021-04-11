@@ -11,7 +11,7 @@ export class AuthService {
 
   async registerUser(phoneNumber, appVerifier) {
     this.confirmationResult = await this.fsAuth.signInWithPhoneNumber(phoneNumber, appVerifier);
-
+    
   }
 
   getConfirmationResult() {
