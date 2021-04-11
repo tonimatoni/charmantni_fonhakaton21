@@ -6,8 +6,21 @@
 
 <ion-content>
 
-  <form>
-    <ion-list [formGroup]="questionCreateForm" (ngSubmit)="submit()">
+
+  <form (ngSubmit)="submit()">
+    <ion-list [formGroup]="questionCreateForm">
+
+      <!-- <ion-item>
+        <ion-label>Izaberite tip pitanja</ion-label>
+        <ion-select [interfaceOptions]="customActionSheetOptions" formControlName="questionType"
+          interface="action-sheet" placeholder="Select One">
+          <ion-select-option [value]="questionService.questionTypeEnum.YES_NO">
+            {{questionService.questionTypeEnum.YES_NO}}</ion-select-option>
+          <ion-select-option [value]="questionService.questionTypeEnum.SLIDER">
+            {{questionService.questionTypeEnum.SLIDER}}</ion-select-option>
+        </ion-select>
+      </ion-item> -->
+
       <ion-item>
         <ion-label position="floating">Pitanje:</ion-label>
         <ion-input formControlName="questionTitle" inputmode="questionTitle"></ion-input>
@@ -40,4 +53,18 @@
       </ion-button>
     </ion-list>
   </form>
+  <ion-item *ngFor="let question of questions">
+
+    <ion-row text-right>
+
+      <ion-col>
+        {{question.questionTitle}}
+      </ion-col>
+      <ion-col>
+        <ion-button item-right (click)="delete(question.id)" id="btnSpara" size="small" >X</ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-item>
+
 </ion-content>
