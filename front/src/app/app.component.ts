@@ -15,7 +15,6 @@ export class AppComponent {
     try {
       this.fsAuth.setPersistence('local');
       auth.getCurrentUser().then(currUser => {
-        console.log(currUser);
         if (currUser)
           this.fcm.getToken
             .subscribe(
@@ -23,6 +22,7 @@ export class AppComponent {
                 await this.firestore.doc(`users/${currUser.id}`).set({
                   messagingToken: token
                 }, { merge: true })
+                console.log(currUser);
               },
               (error) => { console.error(error); },
             );
@@ -37,6 +37,7 @@ export class AppComponent {
           message: 'This is an alert message.',
           buttons: ['OK']
         });
+        console.log(payload);
       })
     } catch (err) {
         console.log(err);
