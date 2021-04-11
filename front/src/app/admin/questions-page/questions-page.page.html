@@ -12,16 +12,22 @@
 
       <ion-item>
         <ion-label>Izaberite vanrednu situaciju:</ion-label>
-        <ion-select (ionChange)="fetchQuestions($event)" [interfaceOptions]="customActionSheetOptions" formControlName="emergencyID"
-          interface="action-sheet" placeholder="Select One">
+        <ion-select (ionChange)="fetchQuestions($event)" [interfaceOptions]="customActionSheetOptions"
+          formControlName="emergencyID" interface="action-sheet" placeholder="Select One">
           <ion-select-option *ngFor="let emergency of allEmergencies" [value]="emergency.id">
             {{emergency.emergencyType + " | " + emergency.status}}</ion-select-option>
         </ion-select>
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Pitanje:</ion-label>
-        <ion-input formControlName="questionTitle" inputmode="questionTitle"></ion-input>
+        <ion-label item-start="floating">Pitanje:</ion-label>
+        <ion-input type="text" placeholder="Npr. Da li ste ugrozeni?" formControlName="questionTitle"
+          inputmode="questionTitle"></ion-input>
+        <ion-icon type="submit" [disabled]="!questionCreateForm.valid" item-end  name="add-circle-outline"
+          ></ion-icon>
+
+          
+
       </ion-item>
       <div *ngFor="let error of errorMessages.questionTitle">
         <ng-container *ngIf="questionTitle.hasError(error.type) && (questionTitle.dirty || questionTitle.touched)">
@@ -45,10 +51,7 @@
       </div>
  -->
 
-      <ion-button [disabled]="!questionCreateForm.valid" type="submit" expand="block">
-        Submit
-        <ion-icon slot="end" name="create"></ion-icon>
-      </ion-button>
+
     </ion-list>
   </form>
   <ion-item *ngFor="let question of questions">
@@ -59,10 +62,11 @@
         {{question.questionTitle}}
       </ion-col>
       <ion-col>
-        <ion-button item-right (click)="delete(question.id)" id="btnSpara" size="small" >X</ion-button>
+        <ion-button item-right (click)="delete(question.id)" id="btnSpara" size="small">X</ion-button>
       </ion-col>
     </ion-row>
 
   </ion-item>
+  
 
 </ion-content>
