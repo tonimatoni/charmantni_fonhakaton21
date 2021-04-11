@@ -1,0 +1,29 @@
+<div class="app-navbar">
+  <div class="navbar-container">
+    <div class="logo">APVS</div>
+    <div class="menu-button" (click)="toggleMenu()" style="z-index: 2">
+      <i class="fas fa-bars"></i>
+    </div>
+  </div>
+  <!-- <div [class]="classVariable">
+    <div class="navmenu-item"><a href=""> Popuni anketu </a></div>
+    <div class="navmenu-item"><a href=""> Podešavanja </a></div>
+  </div> -->
+</div>
+
+<ion-menu side="end" type="push" contentId="main">
+  <ion-header>
+    <ion-toolbar color="danger">
+      <ion-title>Meni</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item>Nazad</ion-item>
+      <ion-item>Statistika</ion-item>
+      <ion-item>Podešavanja</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-router-outlet id="main"> </ion-router-outlet>

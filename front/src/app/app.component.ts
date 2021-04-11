@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireMessaging } from '@angular/fire/messaging';
 @Component({
   selector: 'app-root',
@@ -6,15 +7,7 @@ import { AngularFireMessaging } from '@angular/fire/messaging';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(private fcm: AngularFireMessaging) {
-    this.fcm.getToken
-      .subscribe(
-        (token) => { console.log('Permission granted! Save to the server!', token); },
-        (error) => { console.error(error); },
-      );
-    this.fcm.onMessage((payload) => {
-      console.log('Message received. ', payload);
-      // ...
-    });
+  constructor(private fsAuth:AngularFireAuth) {
+    this.fsAuth.setPersistence('local');
   }
 }
