@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-user-footer',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserFooterComponent implements OnInit {
   poruke = 2;
-  constructor() {}
+  constructor(private firestore: AngularFirestore) {
+    const markers = [];
+    this.firestore.collection('questions').snapshotChanges(['added', 'modified']).subscribe((change) => {
+      this.poruke = change.length;
+    })
+  }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

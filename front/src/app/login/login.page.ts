@@ -60,16 +60,6 @@ export class LoginPage implements OnInit {
         // User signed in successfully.
         const user = result.user;
         //Store messaging token in firestore
-        this.fcm.getToken
-          .subscribe(
-            async (token) => {
-              await this.firestore.doc(`users/${user.uid}`).set({
-                messagingToken: token
-              }, { merge: true })
-            },
-            (error) => { console.error(error); },
-          );
-          
       this.firestore.doc(`users/${user.uid}`).set({
         municipalityID:this.loginFormGroup.controls.municipality.value
       }, {merge:true})

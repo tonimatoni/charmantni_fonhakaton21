@@ -34,7 +34,7 @@ export class MapComponent implements OnInit {
       let latLng = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
       let mapOptions = {
         center: latLng,
-        zoom: 15,
+        zoom: 8,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       }
 
