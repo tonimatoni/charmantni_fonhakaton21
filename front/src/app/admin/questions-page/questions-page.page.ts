@@ -65,7 +65,7 @@ export class QuestionsPagePage implements OnInit {
     const question = await this.firestore.collection('questions').add({ ...this.questionCreateForm.value, adminID: (await this.auth.getCurrentUser()).uid });
 
     this.questions.push({ ...this.questionCreateForm.value, id: question.id });
-    this.questionCreateForm.reset();
+    this.questionCreateForm['controls']['questionTitle'].reset()
   }
 
   public async delete(questionID) {
