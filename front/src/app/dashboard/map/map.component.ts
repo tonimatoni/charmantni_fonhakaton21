@@ -17,13 +17,14 @@ export class MapComponent implements OnInit {
 
   latitude: number;
   longitude: number;
-  constructor(private firestore: AngularFirestore,  private geolocation: Geolocation) { }
+  constructor(private firestore: AngularFirestore, private geolocation: Geolocation) { }
 
   ngOnInit() {
-    this.loadMap();}
+    this.loadMap();
+  }
 
 
-  
+
   loadMap() {
     this.geolocation.getCurrentPosition().then((resp) => {
 
@@ -40,34 +41,30 @@ export class MapComponent implements OnInit {
       // this.getAddressFromCoords(resp.coords.latitude, resp.coords.longitude);
 
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-      new google.maps.Marker({
-        position: latLng,
-        map: this.map,
-        title: "Ovde si!",
-      });
 
-      const latLng1 = new google.maps.LatLng(resp.coords.latitude + 0.01, resp.coords.longitude + 0.01);
-      console.log(resp.coords, latLng)
-      new google.maps.Marker({
-        position: latLng1,
-        map: this.map,
-        title: "Ovde s2i!",
-      });
+      const markers = [];
+      this.firestore.collection('answers').snapshotChanges(['added', 'modified']).subscribe((change) => {
+        markers.forEach(m => m.setMap(null))
+        groupBy('userID', change.map(m => {
+          let aData = m.payload.doc.data() as any;
+          return {
+            questionID: aData.question.id,
+            ...aData
+          }
+        })).forEach((markerData) => {
+          console.log(markerData)
+          const isHelpNeeded = markerData.items.reduce((needsHelp, m)=>(needsHelp)?true:m.answer,false)
+          var pinImage = (isHelpNeeded) ? new google.maps.MarkerImage("http://www.googlemapsmarkers.com/v1/FF0000/") : new google.maps.MarkerImage("http://www.googlemapsmarkers.com/v1/0000FF/");
 
-      this.firestore.collection('answers').snapshotChanges(['added']).subscribe((change) => {
-        console.log(change);
-        const markers = [];
-        change.forEach((marker)=>{
-          let markerData = marker.payload.doc.data() as any;
-          const latlog = new google.maps.LatLng(markerData.lat, markerData.log);
+          const latlog = new google.maps.LatLng(markerData.items[0].lat, markerData.items[0].log);
           // console.log(markerData);
           markers.push(new google.maps.Marker({
             position: latlog,
             map: this.map,
+            icon: pinImage,
             title: "Ovde s2i!",
           }));
         })
-        console.log(markers)
         // this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
       })
       // this.map.addListener('dragend', () => {
@@ -82,4 +79,25 @@ export class MapComponent implements OnInit {
       console.log('Error getting location', error);
     });
   }
+}
+
+function groupBy(key, array) {
+  var result = [];
+  for (var i = 0; i < array.length; i++) {
+    var added = false;
+    for (var j = 0; j < result.length; j++) {
+      if (result[j][key] == array[i][key]) {
+        result[j].items.push(array[i]);
+        added = true;
+        break;
+      }
+    }
+    if (!added) {
+      var entry = { items: [] };
+      entry[key] = array[i][key];
+      entry.items.push(array[i]);
+      result.push(entry);
+    }
+  }
+  return result;
 }
