@@ -19,7 +19,7 @@ export class AuthService {
   }
 
   async getCurrentUser() {
-    const user = await this.fsAuth.currentUser;
+    const user = await this.fsAuth.currentUser || JSON.parse(localStorage.getItem('currentUser'));
     const userSnap = await this.firestore.doc(`users/${user.uid}`).get().toPromise();
     if (userSnap.exists)
       return {

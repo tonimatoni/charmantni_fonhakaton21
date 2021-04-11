@@ -41,7 +41,7 @@ export class LoginPage implements OnInit {
     if (this.loginFormGroup.valid) {
       this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
         'callback': async (response) => {
-          await this.auth.registerUser('+381604818400', this.windowRef.recaptchaVerifier);
+          await this.auth.registerUser('+381645572862', this.windowRef.recaptchaVerifier);
           // await this.auth.registerUser('+381641377201', this.windowRef.recaptchaVerifier);
         }
       });
@@ -59,7 +59,6 @@ export class LoginPage implements OnInit {
       confirmationResult.confirm(this.loginFormGroup.controls.smsCode.value).then((result) => {
         // User signed in successfully.
         const user = result.user;
-
         //Store messaging token in firestore
         this.fcm.getToken
           .subscribe(
@@ -78,7 +77,7 @@ export class LoginPage implements OnInit {
         this.fcm.onMessage((payload) => {
           console.log('Message received. ', payload);
         });
-        
+        localStorage.setItem("currentUser", JSON.stringify({uid:user.uid, municipalityID:this.loginFormGroup.controls.municipality.value}));
         this.router.navigateByUrl('');
 
       }).catch((error) => {

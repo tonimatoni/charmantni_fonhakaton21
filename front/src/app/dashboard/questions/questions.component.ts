@@ -13,17 +13,16 @@ export class QuestionsComponent implements OnInit {
   emergencies: any[];
   questions: [];
   constructor(private fsAuth: AngularFireAuth, private auth: AuthService, private firestore: AngularFirestore) {
-    fsAuth.onAuthStateChanged(() => {
-      {
-        auth.getCurrentUser().then((currentUser) => {
-          console.log(currentUser);
-          firestore.collection('emergencies', ref => ref.where('municipalityID', '==', currentUser.municipalityID)).get()
-            .subscribe(allEmergencies => {
-              console.log(allEmergencies.docs);
-              this.emergencies = allEmergencies.docs.map(e => ({ ...e.data() as any, id: e.id }))
-            })
-        })
-      }
+    fsAuth.onAuthStateChanged((user) => {
+      console.log(user)
+      auth.getCurrentUser().then((currentUser) => {
+        
+        firestore.collection('emergencies', ref => ref.where('municipalityID', '==', currentUser.municipalityID)).get()
+          .subscribe(allEmergencies => {
+            console.log(allEmergencies.docs);
+            this.emergencies = allEmergencies.docs.map(e => ({ ...e.data() as any, id: e.id }))
+          })
+      })
     })
   }
 
