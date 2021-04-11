@@ -1,29 +1,32 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
 declare const window;
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  confirmationResult:any;
-  constructor(private fsAuth: AngularFireAuth) { }
+  confirmationResult: any;
+  constructor(private fsAuth: AngularFireAuth, private firestore: AngularFirestore) { }
 
-  registerUser(phoneNumber, appVerifier){
-    this.fsAuth.signInWithPhoneNumber(phoneNumber, appVerifier)
-    .then((confirmationResult) => {
-      this.confirmationResult = confirmationResult;
-      // SMS sent. Prompt user to type the code from the message, then sign the
-      // user in with confirmationResult.confirm(code).
-      // window.confirmationResult = confirmationResult;
-      // ...
-    }).catch((error) => {
-      console.log(error);
-      // Error; SMS not sent
-      // ...
-    });
+  async registerUser(phoneNumber, appVerifier) {
+    this.confirmationResult = await this.fsAuth.signInWithPhoneNumber(phoneNumber, appVerifier);
+
   }
 
-  getConfirmationResult(){
+  getConfirmationResult() {
     return this.confirmationResult;
+  }
+
+  async getCurrentUser() {
+    const user = await this.fsAuth.currentUser;
+    const userSnap = await this.firestore.doc(`users/${user.uid}`).get().toPromise();
+    if (userSnap.exists)
+      return {
+        ...userSnap.data() as any,
+        id: userSnap.id
+      }
+    else return user;
+      
   }
 }

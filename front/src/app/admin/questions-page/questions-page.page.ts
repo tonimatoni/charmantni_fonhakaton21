@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-questions-page',
@@ -37,9 +38,8 @@ export class QuestionsPagePage implements OnInit {
   allEmergencies: any;
 
   questions = [];
-  constructor(private formBuilder: FormBuilder, private firestore: AngularFirestore) {
+  constructor(private auth: AuthService, private formBuilder: FormBuilder, private firestore: AngularFirestore) {
     this.getAllEmergencies().subscribe((allEmergencies) => {
-      //   console.log(allEmergencies);
       this.allEmergencies = allEmergencies;
     })
   }
@@ -48,7 +48,7 @@ export class QuestionsPagePage implements OnInit {
   }
 
   public async submit() {
-    const question = await this.firestore.collection('questions').add({ ...this.questionCreateForm.value });
+    const question = await this.firestore.collection('questions').add({ ...this.questionCreateForm.value, adminID: (await this.auth.getCurrentUser()).uid });
 
     this.questions.push({ ...this.questionCreateForm.value, id: question.id });
     this.questionCreateForm.reset();
@@ -57,7 +57,7 @@ export class QuestionsPagePage implements OnInit {
   public async delete(questionID) {
     console.log(questionID);
     this.firestore.collection('questions').doc(questionID).delete();
-    this.questions.filter(q => q.id = questionID);
+    this.questions = this.questions.filter(q => q.id != questionID);
   }
 
   getAllEmergencies() {
