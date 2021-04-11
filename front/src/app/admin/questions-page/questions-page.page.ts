@@ -50,8 +50,8 @@ export class QuestionsPagePage implements OnInit {
         //   console.log(questions)
         // })
         this.getAllEmergencies().subscribe(async (allEmergencies) => {
-          console.log(allEmergencies)
-          this.allEmergencies = allEmergencies;
+          console.log(await allEmergencies)
+          this.allEmergencies = await allEmergencies;
         })
       })
     })
@@ -85,13 +85,31 @@ export class QuestionsPagePage implements OnInit {
   getAllEmergencies() {
     console.log(this.adminID)
     return this.firestore.collection(`emergencies`, (ref) => ref.where('adminID', '==', this.adminID)).get().pipe(
-      map(ms => ms.docs.map(md => ({
-        ...md.data() as any,
-        id: md.id
-      })
-      )
+      map(ms => {
+        return Promise.all(ms.docs.map(async md => {
+          const emergency = md.data() as any;
+          const municipality = await this.getMunicipilityByID(emergency.municipalityID)
+          return {
+            ...md.data() as any,
+            municipality: { ...municipality.data() as any, id: municipality.id },
+            id: md.id
+          }
+        }))
+      }
       ))
   }
+
+  municipality: any;
+
+  async getMunicipilityByID(docId: string) {
+    console.log(docId)
+    if (typeof (docId) != 'undefined')
+      return await this.firestore
+        .doc(`municipalities/${docId}`)
+        .ref
+        .get()
+  }
+
   getQuestions(emergencyID) {
     return this.firestore.collection(`questions`, (ref) => ref.where('adminID', '==', this.adminID).where('emergencyID', '==', emergencyID)).get().pipe(
       map(ms => ms.docs.map(md => ({
@@ -102,6 +120,5 @@ export class QuestionsPagePage implements OnInit {
       )
     );
   }
-
 
 }
