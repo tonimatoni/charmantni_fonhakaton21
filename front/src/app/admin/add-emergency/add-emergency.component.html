@@ -1,71 +1,105 @@
 <ion-content>
+  <ion-button
+    expand="block"
+    fill="solid"
+    (click)="toggleShow()"
+    class="my-button"
+    >Proglasite vanrednu situaciju</ion-button
+  >
+  <div *ngIf="show" class="emergency-form">
+    <form (ngSubmit)="submit()">
+      <ion-list [formGroup]="emergencyCreateForm">
+        <ion-item>
+          <ion-label position="floating">Tip situacije:</ion-label>
+          <ion-input
+            clearInput
+            formControlName="emergencyType"
+            inputmode="emergencyType"
+          ></ion-input>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.emergencyType">
+          <ng-container
+            *ngIf="
+              emergencyType.hasError(error.type) &&
+              (emergencyType.dirty || emergencyType.touched)
+            "
+          >
+            <small class="error-message">{{ error.message }}</small>
+          </ng-container>
+        </div>
 
+        <ion-item>
+          <ion-label>Status situacije</ion-label>
+          <ion-select
+            formControlName="status"
+            [interfaceOptions]="customActionSheetOptions"
+            interface="action-sheet"
+            placeholder="Izaberite situaciju"
+          >
+            <ion-select-option [value]="emergencyService.statusEnums.PENDING">
+              {{ emergencyService.statusEnums.PENDING }}</ion-select-option
+            >
+            <ion-select-option [value]="emergencyService.statusEnums.STARTED">
+              {{ emergencyService.statusEnums.STARTED }}</ion-select-option
+            >
+            <ion-select-option [value]="emergencyService.statusEnums.FINISHED">
+              {{ emergencyService.statusEnums.FINISHED }}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
 
-    <ion-button expand="block" fill="solid" (click)="toggleShow()">Proglasite vanrednu situaciju</ion-button>
-    <div *ngIf="show">
-        <form (ngSubmit)="submit()">
+        <div *ngFor="let error of errorMessages.status">
+          <ng-container
+            *ngIf="
+              status.hasError(error.type) && (status.dirty || status.touched)
+            "
+          >
+            <small class="error-message">{{ error.message }}</small>
+          </ng-container>
+        </div>
 
-            <ion-list [formGroup]="emergencyCreateForm">
-                <ion-item>
-                    <ion-label position="floating">Tip situacije:</ion-label>
-                    <ion-input clearInput formControlName="emergencyType" inputmode="emergencyType"></ion-input>
-                </ion-item>
-                <div *ngFor="let error of errorMessages.emergencyType">
-                    <ng-container
-                        *ngIf="emergencyType.hasError(error.type) && (emergencyType.dirty || emergencyType.touched)">
-                        <small class="error-message">{{error.message}}</small>
-                    </ng-container>
-                </div>
+        <ion-item>
+          <ion-label position="floating">Savet gradjanima:</ion-label>
+          <ion-input
+            clearInput
+            formControlName="advice"
+            inputmode="advice"
+          ></ion-input>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.advice">
+          <ng-container
+            *ngIf="
+              advice.hasError(error.type) && (advice.dirty || advice.touched)
+            "
+          >
+            <small class="error-message">{{ error.message }}</small>
+          </ng-container>
+        </div>
 
-                <ion-item>
-                    <ion-label>Status situacije</ion-label>
-                    <ion-select formControlName="status" [interfaceOptions]="customActionSheetOptions"
-                        interface="action-sheet" placeholder="Izaberite situaciju">
-                        <ion-select-option [value]="emergencyService.statusEnums.PENDING">
-                            {{emergencyService.statusEnums.PENDING}}</ion-select-option>
-                        <ion-select-option [value]="emergencyService.statusEnums.STARTED">
-                            {{emergencyService.statusEnums.STARTED}}</ion-select-option>
-                        <ion-select-option [value]="emergencyService.statusEnums.FINISHED">
-                            {{emergencyService.statusEnums.FINISHED}}</ion-select-option>
-                    </ion-select>
-                </ion-item>
-
-                <div *ngFor="let error of errorMessages.status">
-                    <ng-container *ngIf="status.hasError(error.type) && (status.dirty || status.touched)">
-                        <small class="error-message">{{error.message}}</small>
-                    </ng-container>
-                </div>
-
-                <ion-item>
-                    <ion-label position="floating">Savet gradjanima::</ion-label>
-                    <ion-input clearInput formControlName="advice" inputmode="advice"></ion-input>
-                </ion-item>
-                <div *ngFor="let error of errorMessages.advice">
-                    <ng-container *ngIf="advice.hasError(error.type) && (advice.dirty || advice.touched)">
-                        <small class="error-message">{{error.message}}</small>
-                    </ng-container>
-                </div>
-
-                <!-- <ion-item>
+        <!-- <ion-item>
                     <!-- select with search bar needed for opstina -->
-                <!--<ion-label position="floating">Opština</ion-label>
+        <!--<ion-label position="floating">Opština</ion-label>
                     <ion-select formControlName='municipality' okText="Potvrdi" cancelText="Otkaži">
                         <ion-select-option *ngFor="let m of allMunicipilities" [value]="m.MBOPS">{{m.nOPS}}</ion-select-option>
                     </ion-select>
                 </ion-item> -->
 
-                <ion-button [disabled]="!emergencyCreateForm.valid" type="submit" expand="block">
-                    Submit
-                    <ion-icon slot="end" name="create"></ion-icon>
-                </ion-button>
-            </ion-list>
-        </form>
+        <ion-button
+          [disabled]="!emergencyCreateForm.valid"
+          type="submit"
+          expand="block"
+        >
+          Submit
+          <ion-icon slot="end" name="create"></ion-icon>
+        </ion-button>
+      </ion-list>
+    </form>
+  </div>
 
-
-    </div>
-
-    <ion-label>Pregled vanrednih situacija:</ion-label>
-    <ion-item *ngFor="let e of allEmergencies">
-        <ion-button [color]="getColor(e.status)" >{{e.municipality.nOPS + " | "+ e.emergencyType + " | " + e.status}}</ion-button>
-    </ion-item>
+  <ion-label>Pregled vanrednih situacija:</ion-label>
+  <ion-item *ngFor="let e of allEmergencies">
+    <ion-button [color]="getColor(e.status)">{{
+      e.municipality.nOPS + " | " + e.emergencyType + " | " + e.status
+    }}</ion-button>
+  </ion-item>
 </ion-content>
