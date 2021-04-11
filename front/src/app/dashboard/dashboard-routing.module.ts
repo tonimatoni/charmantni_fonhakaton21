@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardPage } from './dashboard.page';
 import { MapComponent } from './map/map.component';
 import { QuestionsComponent } from './questions/questions.component';
+import { AdvicesComponent } from '../advices/advices.component';
 
 const routes: Routes = [
   {
@@ -22,8 +23,14 @@ const routes: Routes = [
         path: 'poruke',
         component: QuestionsComponent,
       },
+      {
+        path: 'predlozi',
+        component: AdvicesComponent,
+      },
     ],
   },
+    ]
+  }
 ];
 
 @NgModule({

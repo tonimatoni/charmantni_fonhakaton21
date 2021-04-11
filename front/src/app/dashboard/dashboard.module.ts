@@ -15,6 +15,7 @@ import { UserNavbarComponent } from '../user-navbar/user-navbar.component';
 
 import { UserFooterComponent } from '../user-footer/user-footer.component';
 import { MapComponent } from './map/map.component';
+import { AdvicesComponent } from '../advices/advices.component';
 
 @NgModule({
   imports: [

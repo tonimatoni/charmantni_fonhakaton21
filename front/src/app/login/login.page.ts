@@ -28,7 +28,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.loginFormGroup = new FormGroup({
-      jmbg: new FormControl('', [Validators.required, Validators.minLength(13), Validators.maxLength(13), Validators.pattern('^[0-9]*$')]),
+      // jmbg: new FormControl('', [Validators.required, Validators.minLength(13), Validators.maxLength(13), Validators.pattern('^[0-9]*$')]),
       smsCode: new FormControl('', [Validators.minLength(6), Validators.maxLength(6), Validators.pattern('^[0-9]*$')]),
       municipality: new FormControl('', [Validators.required]),
       phoneNumber: new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$')]),
@@ -41,7 +41,7 @@ export class LoginPage implements OnInit {
     if (this.loginFormGroup.valid) {
       this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
         'callback': async (response) => {
-          await this.auth.registerUser('+381645572862', this.windowRef.recaptchaVerifier);
+          await this.auth.registerUser(`+381${this.loginFormGroup.controls.phoneNumber.value}`, this.windowRef.recaptchaVerifier);
           // await this.auth.registerUser('+381641377201', this.windowRef.recaptchaVerifier);
         }
       });
@@ -74,9 +74,6 @@ export class LoginPage implements OnInit {
         municipalityID:this.loginFormGroup.controls.municipality.value
       }, {merge:true})
 
-        this.fcm.onMessage((payload) => {
-          console.log('Message received. ', payload);
-        });
         localStorage.setItem("currentUser", JSON.stringify({uid:user.uid, municipalityID:this.loginFormGroup.controls.municipality.value}));
         this.router.navigateByUrl('');
 

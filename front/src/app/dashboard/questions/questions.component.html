@@ -1,18 +1,17 @@
-<p>
-  questions works!
-</p>
-<ion-card *ngFor="let emergency of emergencies">
-    <ion-card-header>
-        <ion-card-subtitle>{{emergency.emergencyType}}</ion-card-subtitle>
-        <ion-card-title>{{emergency.status}}</ion-card-title>
-    </ion-card-header>
+<div>
+    <ion-card *ngFor="let emergency of emergencies">
+        <ion-card-header>
+            <ion-card-subtitle>{{emergency.emergencyType}}</ion-card-subtitle>
+            <ion-card-title>{{emergency.status}}</ion-card-title>
+        </ion-card-header>
 
-    <ion-card-content>
-        <ion-list>
-            <ion-item *ngFor="let q of emergency.questions">
-                <ion-label>{{q.questionTitle}}</ion-label>
-                <ion-checkbox slot="start"></ion-checkbox>
-            </ion-item>
-        </ion-list>
-    </ion-card-content>
-</ion-card>
+        <ion-card-content>
+            <ion-list>
+                <ion-item *ngFor="let q of emergency.questions">
+                    <ion-label>{{q.questionTitle}}</ion-label>
+                    <ion-checkbox #question [checked]="q.checked " (ionChange)="checkoxChange(question, q)" slot="start"></ion-checkbox>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+</div>
