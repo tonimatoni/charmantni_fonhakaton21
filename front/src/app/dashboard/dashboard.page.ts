@@ -20,7 +20,7 @@ export class DashboardPage implements OnInit {
           ...change[0].payload.doc.data() as any,
           id: change[0].payload.doc.id
         }
-        const alert = await this.alertController.create({
+        const alertD = await this.alertController.create({
           cssClass: 'my-custom-class',
           header: 'UPITNIK',
           subHeader: 'Molimo Vas da nam odgovorite na sledeće pitanje',
@@ -55,7 +55,7 @@ export class DashboardPage implements OnInit {
           }]
 
         });
-        alert.present();
+        alertD.present();
 
         console.log(newQuestion)
       } catch (err) {
