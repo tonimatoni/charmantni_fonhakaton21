@@ -61,7 +61,7 @@ export class DashboardPage implements OnInit {
         change.forEach((marker)=>{
           let markerData = marker.payload.doc.data() as any;
           const latlog = new google.maps.LatLng(markerData.lat, markerData.log);
-          console.log(markerData);
+          // console.log(markerData);
           markers.push(new google.maps.Marker({
             position: latlog,
             map: this.map,

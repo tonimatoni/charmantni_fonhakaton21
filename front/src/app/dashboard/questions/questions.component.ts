@@ -14,7 +14,6 @@ export class QuestionsComponent implements OnInit {
   questions: [];
   constructor(private fsAuth: AngularFireAuth, private auth: AuthService, private firestore: AngularFirestore) {
     fsAuth.onAuthStateChanged((user) => {
-      console.log(user)
       auth.getCurrentUser().then((currentUser) => {
         
         firestore.collection('emergencies', ref => ref.where('municipalityID', '==', currentUser.municipalityID)).get()
