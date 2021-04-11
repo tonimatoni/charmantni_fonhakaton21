@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-user-navbar',
@@ -6,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-navbar.component.scss'],
 })
 export class UserNavbarComponent implements OnInit {
+  constructor(private menu: MenuController) {}
 
-  constructor() { }
+  toggleMenu() {
+    this.menu.toggle('end');
+  }
 
   ngOnInit() {}
-
 }

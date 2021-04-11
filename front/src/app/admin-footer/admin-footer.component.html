@@ -3,15 +3,18 @@
     <ion-col size="4" class="tabs">
       <a href="/info" class="tab-link">
         <div class="icon">
-          <i class="fas fa-info"></i>
+          <i class="fas fa-exclamation-triangle"></i>
         </div>
-        <p class="tab-description">Info</p>
+        <p class="tab-description">Stanje</p>
       </a>
     </ion-col>
 
     <ion-col size="4" class="tabs">
       <a href="/mapa" class="tab-link">
-        <div class="icon"><i class="fas fa-map-marked-alt"></i></div>
+        <div class="icon">
+          <i class="fas fa-map-marked-alt"></i>
+          <ion-badge>{{ poruke ? poruke : "" }}</ion-badge>
+        </div>
         <p class="tab-description">Mapa</p>
       </a>
     </ion-col>
@@ -19,10 +22,9 @@
     <ion-col size="4" class="tabs">
       <a href="/poruke" class="tab-link">
         <div class="icon">
-          <i class="far fa-envelope"></i
-          ><ion-badge>{{ poruke ? poruke : "" }}</ion-badge>
+          <i class="fas fa-plus"></i>
         </div>
-        <p class="tab-description">Poruke</p>
+        <p class="tab-description">Kreiraj</p>
       </a>
     </ion-col>
   </ion-row>
