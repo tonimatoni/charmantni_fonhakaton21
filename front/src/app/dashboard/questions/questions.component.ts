@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from 'src/app/auth/auth.service';
 
@@ -9,11 +10,20 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class QuestionsComponent implements OnInit {
 
-  emergencies: [];
+  emergencies: any[];
   questions: [];
-  constructor(private auth: AuthService, private firestore: AngularFirestore) {
-    auth.getCurrentUser().then((currentUser) => {
-      firestore.collection('emergencies', ref => ref.where('municipalityID', '==', currentUser.municipalityID))
+  constructor(private fsAuth: AngularFireAuth, private auth: AuthService, private firestore: AngularFirestore) {
+    fsAuth.onAuthStateChanged(() => {
+      {
+        auth.getCurrentUser().then((currentUser) => {
+          console.log(currentUser);
+          firestore.collection('emergencies', ref => ref.where('municipalityID', '==', currentUser.municipalityID)).get()
+            .subscribe(allEmergencies => {
+              console.log(allEmergencies.docs);
+              this.emergencies = allEmergencies.docs.map(e => ({ ...e.data() as any, id: e.id }))
+            })
+        })
+      }
     })
   }
 

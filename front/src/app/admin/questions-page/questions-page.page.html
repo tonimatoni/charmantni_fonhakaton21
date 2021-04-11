@@ -10,16 +10,14 @@
   <form (ngSubmit)="submit()">
     <ion-list [formGroup]="questionCreateForm">
 
-      <!-- <ion-item>
-        <ion-label>Izaberite tip pitanja</ion-label>
-        <ion-select [interfaceOptions]="customActionSheetOptions" formControlName="questionType"
+      <ion-item>
+        <ion-label>Izaberite vanrednu situaciju:</ion-label>
+        <ion-select (ionChange)="fetchQuestions($event)" [interfaceOptions]="customActionSheetOptions" formControlName="emergencyID"
           interface="action-sheet" placeholder="Select One">
-          <ion-select-option [value]="questionService.questionTypeEnum.YES_NO">
-            {{questionService.questionTypeEnum.YES_NO}}</ion-select-option>
-          <ion-select-option [value]="questionService.questionTypeEnum.SLIDER">
-            {{questionService.questionTypeEnum.SLIDER}}</ion-select-option>
+          <ion-select-option *ngFor="let emergency of allEmergencies" [value]="emergency.id">
+            {{emergency.emergencyType + " | " + emergency.status}}</ion-select-option>
         </ion-select>
-      </ion-item> -->
+      </ion-item>
 
       <ion-item>
         <ion-label position="floating">Pitanje:</ion-label>

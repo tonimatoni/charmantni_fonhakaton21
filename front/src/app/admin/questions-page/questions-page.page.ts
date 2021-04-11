@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
@@ -13,9 +14,9 @@ export class QuestionsPagePage implements OnInit {
   get questionTitle() {
     return this.questionCreateForm.get('questionTitle');
   }
-  // get questionType() {
-  //   return this.questionCreateForm.get('questionType');
-  // }
+  get emergencyID() {
+    return this.questionCreateForm.get('emergencyID');
+  }
 
   public errorMessages = {
     questionTitle: [
@@ -25,10 +26,10 @@ export class QuestionsPagePage implements OnInit {
 
 
   questionCreateForm = this.formBuilder.group({
-    // questionType: ['',
-    //   [
-    //     Validators.required,
-    //   ]],
+    emergencyID: ['',
+      [
+        Validators.required,
+      ]],
     questionTitle: ['',
       [
         Validators.required,
@@ -36,15 +37,28 @@ export class QuestionsPagePage implements OnInit {
   });
 
   allEmergencies: any;
+  question: any;
+  adminID: string;
 
   questions = [];
-  constructor(private auth: AuthService, private formBuilder: FormBuilder, private firestore: AngularFirestore) {
-    this.getAllEmergencies().subscribe((allEmergencies) => {
-      this.allEmergencies = allEmergencies;
+  constructor(private fsAuth: AngularFireAuth, private auth: AuthService, private formBuilder: FormBuilder, private firestore: AngularFirestore) {
+    fsAuth.onAuthStateChanged(() => {
+      this.auth.getCurrentUser().then(data => {
+        this.adminID = data.uid;
+        // this.getQuestions().subscribe(async (questions) => {
+        //   this.questions = questions;
+        //   console.log(questions)
+        // })
+        this.getAllEmergencies().subscribe(async (allEmergencies) => {
+          console.log(allEmergencies)
+          this.allEmergencies = allEmergencies;
+        })
+      })
     })
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+
   }
 
   public async submit() {
@@ -60,17 +74,34 @@ export class QuestionsPagePage implements OnInit {
     this.questions = this.questions.filter(q => q.id != questionID);
   }
 
+  fetchQuestions(e) {
+    console.log(e.target)
+    this.getQuestions(e.target.value).subscribe(async (questions) => {
+      this.questions = questions;
+      console.log(questions)
+    })
+  }
+
   getAllEmergencies() {
-    return this.firestore.collection(`emergencies`).get().pipe(
+    console.log(this.adminID)
+    return this.firestore.collection(`emergencies`, (ref) => ref.where('adminID', '==', this.adminID)).get().pipe(
       map(ms => ms.docs.map(md => ({
         ...md.data() as any,
         id: md.id
       })
       )
-      ));
+      ))
   }
-
-
+  getQuestions(emergencyID) {
+    return this.firestore.collection(`questions`, (ref) => ref.where('adminID', '==', this.adminID).where('emergencyID', '==', emergencyID)).get().pipe(
+      map(ms => ms.docs.map(md => ({
+        ...md.data() as any,
+        id: md.id
+      })
+      )
+      )
+    );
+  }
 
 
 }

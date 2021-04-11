@@ -42,6 +42,7 @@ export class LoginPage implements OnInit {
       this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
         'callback': async (response) => {
           await this.auth.registerUser('+381604818400', this.windowRef.recaptchaVerifier);
+          // await this.auth.registerUser('+381641377201', this.windowRef.recaptchaVerifier);
         }
       });
       this.windowRef.recaptchaVerifier.render()
