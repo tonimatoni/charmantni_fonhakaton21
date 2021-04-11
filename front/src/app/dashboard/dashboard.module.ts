@@ -15,6 +15,7 @@ import { UserNavbarComponent } from '../user-navbar/user-navbar.component';
 import { AdminNavbarComponent } from '../Admin-navbar/Admin-navbar.component';
 import { UserFooterComponent } from '../user-footer/user-footer.component';
 import { AdminFooterComponent } from '../admin-footer/admin-footer.component';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   imports: [
@@ -29,6 +30,8 @@ import { AdminFooterComponent } from '../admin-footer/admin-footer.component';
     UserNavbarComponent,
     UserFooterComponent,
     AdminNavbarComponent,
-    AdminFooterComponent,]
+    AdminFooterComponent,
+    MapComponent
+  ]
 })
 export class DashboardPageModule { }
