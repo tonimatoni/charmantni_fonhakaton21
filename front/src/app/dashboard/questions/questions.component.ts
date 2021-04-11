@@ -9,14 +9,14 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class QuestionsComponent implements OnInit {
 
-  emergencies:[];
-  questions:[];
+  emergencies: [];
+  questions: [];
   constructor(private auth: AuthService, private firestore: AngularFirestore) {
-    auth.getCurrentUser().then((currentUser)=>{
-      firestore.collection('emergencies').where('municipalityID', '==', currentUser.municipalityID)
+    auth.getCurrentUser().then((currentUser) => {
+      firestore.collection('emergencies', ref => ref.where('municipalityID', '==', currentUser.municipalityID))
     })
-   }
+  }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
 }

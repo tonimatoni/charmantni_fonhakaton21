@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { EmergencyService } from 'src/app/services/emergency.service';
 import { MunicipilityService } from 'src/app/services/municipility.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-add-emergency',
@@ -49,7 +50,7 @@ export class AddEmergencyComponent implements OnInit {
   show = false;
   allMunicipilities: any[];
 
-  constructor(private municipalityService: MunicipilityService, private formBuilder: FormBuilder, private firestore: AngularFirestore, private emergencyService: EmergencyService) {
+  constructor(private auth:AuthService, private municipalityService: MunicipilityService, private formBuilder: FormBuilder, private firestore: AngularFirestore, private emergencyService: EmergencyService) {
     
     municipalityService.getAllMunicipilities().subscribe((allMunicipilities) => {
       console.log(allMunicipilities);
@@ -63,9 +64,13 @@ export class AddEmergencyComponent implements OnInit {
 
   public async submit() {
     try {
+      
       await this.firestore
         .collection('emergencies')
-        .add(this.emergencyCreateForm.value)
+        .add({
+          ...this.emergencyCreateForm.value,
+          adminID: (await this.auth.getCurrentUser()).uid
+        })
 
       alert("Uspesno ste proglasili vanrednu sitauciju.")
     } catch (error) {
