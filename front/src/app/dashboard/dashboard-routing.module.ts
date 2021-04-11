@@ -7,6 +7,7 @@ import { Tab2Page } from '../tab2/tab2.page';
 import { Tab3Page } from '../tab3/tab3.page';
 import { MapComponent } from './map/map.component';
 import { QuestionsComponent } from './questions/questions.component';
+import { AdvicesComponent } from '../advices/advices.component';
 
 const routes: Routes = [
   {
@@ -23,7 +24,12 @@ const routes: Routes = [
       {
         path: 'poruke',
         component: QuestionsComponent,
-      }]
+      },
+      {
+        path: 'predlozi',
+        component: AdvicesComponent,
+      },
+    ]
   }
 ];
 
