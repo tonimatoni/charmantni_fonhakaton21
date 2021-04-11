@@ -7,14 +7,13 @@ import { IonicModule } from '@ionic/angular';
 import { DashboardPageRoutingModule } from './dashboard-routing.module';
 
 import { DashboardPage } from './dashboard.page';
-import { AnswerComponent } from './answer/answer.component'
+import { AnswerComponent } from './answer/answer.component';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { QuestionsComponent } from './questions/questions.component';
 
 import { UserNavbarComponent } from '../user-navbar/user-navbar.component';
-import { AdminNavbarComponent } from '../Admin-navbar/Admin-navbar.component';
+
 import { UserFooterComponent } from '../user-footer/user-footer.component';
-import { AdminFooterComponent } from '../admin-footer/admin-footer.component';
 import { MapComponent } from './map/map.component';
 
 @NgModule({
@@ -23,15 +22,16 @@ import { MapComponent } from './map/map.component';
     FormsModule,
     IonicModule,
     DashboardPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [Geolocation],
-  declarations: [DashboardPage, AnswerComponent, QuestionsComponent,
+  declarations: [
+    DashboardPage,
+    AnswerComponent,
+    QuestionsComponent,
     UserNavbarComponent,
     UserFooterComponent,
-    AdminNavbarComponent,
-    AdminFooterComponent,
-    MapComponent
-  ]
+    MapComponent,
+  ],
 })
-export class DashboardPageModule { }
+export class DashboardPageModule {}

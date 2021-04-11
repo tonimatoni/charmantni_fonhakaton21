@@ -3,20 +3,31 @@ import { Routes, RouterModule } from '@angular/router';
 import { AddEmergencyComponent } from './add-emergency/add-emergency.component';
 
 import { AdminPage } from './admin.page';
+import { MapComponent } from './map/map.component';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {
+    path: 'admin',
+    redirectTo: 'mapa',
+  },
+  {
     path: '',
-    component: AdminPage
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'vanredne-situacije',
-    component: AddEmergencyComponent 
+    component: AdminPage,
+    children: [
+      {
+        path: 'mapa',
+        component: MapComponent,
+      },
+      {
+        path: 'vanredne-situacije',
+        component: AddEmergencyComponent,
+      },
+      {
+        path: 'login',
+        component: LoginComponent,
+      },
+    ],
   },
 ];
 
