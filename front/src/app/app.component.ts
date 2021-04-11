@@ -11,8 +11,15 @@ declare const window: any;
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(public alertController: AlertController,private auth: AuthService, private firestore: AngularFirestore, private fcm: AngularFireMessaging, private fsAuth: AngularFireAuth) {
+  constructor(public alertController: AlertController, private auth: AuthService, private firestore: AngularFirestore, private fcm: AngularFireMessaging, private fsAuth: AngularFireAuth) {
     try {
+       this.alertController.create({
+        cssClass: 'my-custom-class',
+        header: 'UPITNIK',
+        subHeader: 'Molimo Vas da nam odgovorite na sledeće pitanje',
+        message: "newQuestion.questionTitle",
+        buttons: ['DA', 'NE']
+      });
       this.fsAuth.setPersistence('local');
       auth.getCurrentUser().then(currUser => {
         if (currUser)
@@ -29,7 +36,8 @@ export class AppComponent {
       })
 
 
-      this.fcm.onMessage(async(payload) => {
+
+      this.fcm.onMessage(async (payload) => {
         const alert = await this.alertController.create({
           cssClass: 'my-custom-class',
           header: 'Alert',
@@ -37,10 +45,11 @@ export class AppComponent {
           message: 'This is an alert message.',
           buttons: ['OK']
         });
+        alert.present();
         console.log(payload);
       })
     } catch (err) {
-        console.log(err);
-      }
+      console.log(err);
     }
+  }
 }
