@@ -27,6 +27,17 @@ const routes: Routes = [
         path: 'login',
         component: LoginComponent,
       },
+      {
+        path: 'questions',
+        loadChildren: () =>
+          import('./questions-page/questions-page.module').then(
+            (m) => m.QuestionsPagePageModule
+          ),
+      },
+      {
+        path: 'vanredne-situacije',
+        component: AddEmergencyComponent,
+      },
     ],
   },
 ];
