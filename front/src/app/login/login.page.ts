@@ -74,9 +74,6 @@ export class LoginPage implements OnInit {
         municipalityID:this.loginFormGroup.controls.municipality.value
       }, {merge:true})
 
-        this.fcm.onMessage((payload) => {
-          console.log('Message received. ', payload);
-        });
         localStorage.setItem("currentUser", JSON.stringify({uid:user.uid, municipalityID:this.loginFormGroup.controls.municipality.value}));
         this.router.navigateByUrl('');
 
