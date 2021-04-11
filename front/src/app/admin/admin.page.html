@@ -5,7 +5,9 @@
   <ion-grid class="h-100">
     <ion-row class="h-100">
       <ion-col>
-        <ion-router-outlet></ion-router-outlet>
+        <ion-scroll scrollY="true">
+          <ion-router-outlet></ion-router-outlet>
+        </ion-scroll>
       </ion-col>
     </ion-row>
   </ion-grid>

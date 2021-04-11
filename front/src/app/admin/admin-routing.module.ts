@@ -24,19 +24,15 @@ const routes: Routes = [
         component: AddEmergencyComponent,
       },
       {
-        path: 'login',
-        component: LoginComponent,
-      },
-      {
-        path: 'questions',
+        path: 'upiti',
         loadChildren: () =>
           import('./questions-page/questions-page.module').then(
             (m) => m.QuestionsPagePageModule
           ),
       },
       {
-        path: 'vanredne-situacije',
-        component: AddEmergencyComponent,
+        path: 'login',
+        component: LoginComponent,
       },
     ],
   },
