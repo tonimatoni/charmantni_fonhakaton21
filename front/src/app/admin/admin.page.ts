@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @Component({
   selector: 'app-admin',
@@ -7,17 +8,14 @@ import { AngularFireAuth } from '@angular/fire/auth';
   styleUrls: ['./admin.page.scss'],
 })
 export class AdminPage implements OnInit {
+  constructor(
+    private fsAuth: AngularFireAuth,
+    private geolocation: Geolocation
+  ) {}
 
-  
-  constructor(private fsAuth:AngularFireAuth) {
+  ngOnInit() {}
 
-  }
-
-  ngOnInit() {
-  }
-
-  logout(){
+  logout() {
     this.fsAuth.signOut();
   }
-
 }

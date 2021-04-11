@@ -13,6 +13,7 @@ import { AdminFooterComponent } from './admin-footer/admin-footer.component';
 import { MapComponent } from './map/map.component';
 import { LoginComponent } from './login/login.component';
 import { AddEmergencyComponent } from './add-emergency/add-emergency.component';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @NgModule({
   imports: [
@@ -31,5 +32,6 @@ import { AddEmergencyComponent } from './add-emergency/add-emergency.component';
     AdminFooterComponent,
     MapComponent,
   ],
+  providers: [Geolocation],
 })
 export class AdminPageModule {}
