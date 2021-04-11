@@ -7,8 +7,13 @@ import { IonicModule } from '@ionic/angular';
 import { AdminPageRoutingModule } from './admin-routing.module';
 
 import { AdminPage } from './admin.page';
+import { AdminNavbarComponent } from './admin-navbar/admin-navbar.component';
+
+import { AdminFooterComponent } from './admin-footer/admin-footer.component';
+import { MapComponent } from './map/map.component';
 import { LoginComponent } from './login/login.component';
 import { AddEmergencyComponent } from './add-emergency/add-emergency.component';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @NgModule({
   imports: [
@@ -16,13 +21,17 @@ import { AddEmergencyComponent } from './add-emergency/add-emergency.component';
     FormsModule,
     IonicModule,
     AdminPageRoutingModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
   ],
   declarations: [
-    AdminPage, 
-    LoginComponent, 
-    AddEmergencyComponent
-  ]
+    AdminPage,
+    LoginComponent,
+    AddEmergencyComponent,
+    AdminNavbarComponent,
+    AdminFooterComponent,
+    MapComponent,
+  ],
+  providers: [Geolocation],
 })
 export class AdminPageModule {}

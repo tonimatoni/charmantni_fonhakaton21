@@ -8,7 +8,7 @@ export class EmergencyService {
   statusEnums = {
     PENDING: 'POCINJE',
     STARTED: 'POCELA',
-    FINISHED: 'ZAVRSE'
+    FINISHED: 'ZAVRSENA'
   }
 
 
