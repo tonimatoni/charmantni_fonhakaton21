@@ -1,0 +1,47 @@
+.bottom-navbar {
+  height: 70px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background-color: #3ba452;
+}
+
+.bottom-navbar-container {
+  margin: 3px 5vw;
+  display: flex;
+  align-items: center;
+}
+
+.tabs {
+  font-size: 18px;
+  &:hover {
+    background-color: #7aa884;
+  }
+}
+
+.tab-link {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  font-size: 20px;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+p {
+  margin-bottom: 0;
+}
+
+.tabs ion-badge {
+  background-color: red;
+}

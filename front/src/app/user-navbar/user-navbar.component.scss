@@ -1,0 +1,28 @@
+.user-navbar {
+  height: 60px;
+  background-color: #3ba452;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 5vw;
+  height: 100%;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: bold;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.menu-button {
+  font-size: 26px;
+  font-weight: bold;
+  z-index: 2;
+  &:hover {
+    cursor: pointer;
+  }
+}

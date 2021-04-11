@@ -11,6 +11,11 @@ import { AnswerComponent } from './answer/answer.component'
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { QuestionsComponent } from './questions/questions.component';
 
+import { UserNavbarComponent } from '../user-navbar/user-navbar.component';
+import { AdminNavbarComponent } from '../Admin-navbar/Admin-navbar.component';
+import { UserFooterComponent } from '../user-footer/user-footer.component';
+import { AdminFooterComponent } from '../admin-footer/admin-footer.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -20,6 +25,10 @@ import { QuestionsComponent } from './questions/questions.component';
     ReactiveFormsModule
   ],
   providers: [Geolocation],
-  declarations: [DashboardPage, AnswerComponent, QuestionsComponent]
+  declarations: [DashboardPage, AnswerComponent, QuestionsComponent,
+    UserNavbarComponent,
+    UserFooterComponent,
+    AdminNavbarComponent,
+    AdminFooterComponent,]
 })
 export class DashboardPageModule { }
