@@ -96,14 +96,20 @@ export class AddEmergencyComponent implements OnInit {
     try {
       const { municipalityID } = (await (await this.fsAuth.currentUser).getIdTokenResult()).claims
       const municipality = await this.getMunicipilityByID(municipalityID)
-      this.allEmergencies.push(await this.firestore
+      await this.firestore
         .collection('emergencies')
         .add({
           ...this.emergencyCreateForm.value,
           adminID: (await this.auth.getCurrentUser()).uid,
-          municipality: { ...municipality.data() as any, id: municipality.id },
           municipalityID
-        }));
+        });
+      this.allEmergencies.push({
+        municipality: { ...municipality.data() as any, id: municipality.id },
+        ...this.emergencyCreateForm.value,
+        adminID: (await this.auth.getCurrentUser()).uid,
+        municipalityID
+      })
+      console.log(this.allEmergencies)
 
       alert("Uspesno ste proglasili vanrednu sitauciju.")
     } catch (error) {
