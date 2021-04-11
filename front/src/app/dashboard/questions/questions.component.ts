@@ -19,7 +19,15 @@ export class QuestionsComponent implements OnInit {
         firestore.collection('emergencies', ref => ref.where('municipalityID', '==', currentUser.municipalityID)).get()
           .subscribe(allEmergencies => {
             console.log(allEmergencies.docs);
-            this.emergencies = allEmergencies.docs.map(e => ({ ...e.data() as any, id: e.id }))
+            this.emergencies = allEmergencies.docs.map(e => ({ ...e.data() as any, id: e.id }));
+            firestore.collection('questions').get()
+            .subscribe(allQuestions=>{
+              const questions = allQuestions.docs.map(e => ({ ...e.data() as any, id: e.id }));
+              console.log(questions)
+              for(let e of this.emergencies){
+                e.questions = questions.filter(q=>q.emergencyID===e.id)
+              }
+            })
           })
       })
     })
