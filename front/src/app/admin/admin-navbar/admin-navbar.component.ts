@@ -7,18 +7,7 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['./admin-navbar.component.scss'],
 })
 export class AdminNavbarComponent implements OnInit {
-  constructor(private menu: MenuController) {}
-  // className: string = 'navmenu off';
-
-  openMenu() {
-    this.menu.open('end');
-  }
-  closeMenu() {
-    this.menu.close('end');
-  }
-  toggleMenu() {
-    this.menu.toggle('end');
-  }
+  constructor() {}
 
   ngOnInit() {}
 }
