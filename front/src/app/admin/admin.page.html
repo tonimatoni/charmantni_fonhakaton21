@@ -1,10 +1,15 @@
 <ion-header>
-    <ion-toolbar>
-        <ion-title>admin</ion-title>
-        <ion-button (click)="logout();">Logout</ion-button>
-    </ion-toolbar>
+  <app-admin-navbar> </app-admin-navbar>
 </ion-header>
-
 <ion-content>
-
+  <ion-grid class="h-100">
+    <ion-row class="h-100">
+      <ion-col>
+        <ion-scroll scrollY="true">
+          <ion-router-outlet></ion-router-outlet>
+        </ion-scroll>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <app-admin-footer></app-admin-footer>
 </ion-content>

@@ -5,7 +5,7 @@
   left: 0;
   right: 0;
   width: 100%;
-  background-color: #3ba452;
+  background-color: #2f80ed;
 }
 
 .bottom-navbar-container {
@@ -17,7 +17,7 @@
 .tabs {
   font-size: 18px;
   &:hover {
-    background-color: #7aa884;
+    background-color: #5898eb;
   }
 }
 
@@ -32,6 +32,7 @@
 
 .icon {
   font-size: 20px;
+  color: white;
 }
 
 a {
@@ -40,6 +41,7 @@ a {
 }
 p {
   margin-bottom: 0;
+  color: white;
 }
 
 .tabs ion-badge {

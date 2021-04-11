@@ -1,7 +1,12 @@
 <div class="bottom-navbar">
   <ion-row class="bottom-navbar-container">
     <ion-col size="4" class="tabs">
-      <a href="/info" class="tab-link">
+      <a
+        id="vsTab"
+        [routerLink]="['/admin/vanredne-situacije']"
+        href="vanredne-situacije"
+        class="tab-link"
+      >
         <div class="icon">
           <i class="fas fa-exclamation-triangle"></i>
         </div>
@@ -10,7 +15,12 @@
     </ion-col>
 
     <ion-col size="4" class="tabs">
-      <a href="/mapa" class="tab-link">
+      <a
+        id="mapTab"
+        [routerLink]="['/admin/mapa']"
+        href="mapa"
+        class="tab-link"
+      >
         <div class="icon">
           <i class="fas fa-map-marked-alt"></i>
           <ion-badge>{{ poruke ? poruke : "" }}</ion-badge>
@@ -20,11 +30,16 @@
     </ion-col>
 
     <ion-col size="4" class="tabs">
-      <a href="/poruke" class="tab-link">
+      <a
+        id="qTab"
+        [routerLink]="['/admin/upiti']"
+        href="upiti"
+        class="tab-link"
+      >
         <div class="icon">
-          <i class="fas fa-plus"></i>
+          <i class="fas fa-question"></i>
         </div>
-        <p class="tab-description">Kreiraj</p>
+        <p class="tab-description">Upiti</p>
       </a>
     </ion-col>
   </ion-row>
